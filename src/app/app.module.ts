@@ -30,6 +30,14 @@ import { HeaderComponent } from './components/header/header.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MenuListComponent } from './components/menu-list/menu-list.component';
 import {MatListModule} from '@angular/material/list';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { StoreModule } from '@ngrx/store';
+import { reducers, effects } from './store';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthInterceptor } from './auth-interceptor';
+
+const StoreDevTools = !environment.production ? StoreDevtoolsModule.instrument({maxAge: 50}): []
 
 @NgModule({
   declarations: [
@@ -58,9 +66,20 @@ import {MatListModule} from '@angular/material/list';
     MatIconModule,
     MatButtonModule,
     FlexLayoutModule,
-    MatListModule
+    MatListModule,
+    HttpClientModule,
+    StoreDevTools,
+    StoreModule.forRoot(reducers, {
+      runtimeChecks: {
+        strictActionImmutability: true,
+        strictStateImmutability: true
+      }
+    }),
+    EffectsModule.forRoot(effects)
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

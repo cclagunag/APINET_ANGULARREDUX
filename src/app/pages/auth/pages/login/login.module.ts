@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { SpinnerModule } from '../../../../shared/indicators/spinner/spinner.module';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatButtonModule,
     MatIconModule,
     MatCardModule,
+    SpinnerModule,
     FlexLayoutModule,
     FormsModule
   ]
