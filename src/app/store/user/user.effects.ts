@@ -32,7 +32,7 @@ export class UserEffects {
         this.httpClient.post<UserResponse>(`${environment.url}api/usuario/registrar`, userData)
           .pipe(
             tap((response: UserResponse) => {
-              localStorage.setItem('token', JSON.stringify(response.token));
+              localStorage.setItem('token', response.token);
               this.router.navigate(['/']);
             }),
             map((response: UserResponse) => new fromActions.SignUpEmailSuccess(response.email, response || null)),
@@ -55,7 +55,7 @@ export class UserEffects {
           .pipe(
             tap((response: UserResponse) => {
               console.log(response.token);
-              localStorage.setItem('token', JSON.stringify(response.token));
+              localStorage.setItem('token', response.token);
               this.router.navigate(['/']);
             }),
             map((response: UserResponse) => new fromActions.SignInEmailSuccess(response.email, response || null)),
@@ -72,7 +72,6 @@ export class UserEffects {
   init: Observable<Action> = createEffect(() =>
     this.actions.pipe(
       ofType(fromActions.Types.INIT),
-      tap(async () => console.log("localstorage "+localStorage.getItem('token'))),
       switchMap(async () => localStorage.getItem('token')),
       switchMap(token => {
         if (token) {
@@ -94,6 +93,8 @@ export class UserEffects {
       )
     )
   );
+
+
 
 
 }

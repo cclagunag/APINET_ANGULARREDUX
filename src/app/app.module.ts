@@ -36,6 +36,7 @@ import { StoreModule } from '@ngrx/store';
 import { reducers, effects } from './store';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthInterceptor } from './auth-interceptor';
+import { LayoutsModule } from './shared/layouts';
 
 const StoreDevTools = !environment.production ? StoreDevtoolsModule.instrument({maxAge: 50}): []
 

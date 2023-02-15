@@ -5,10 +5,7 @@ export interface User {
   apellido: string;
   telefono: string;
   email: string;
-  token: Token;
+  token: string;
 }
 
-interface Token {
-  refresh: string;
-  access: string;
-}
+

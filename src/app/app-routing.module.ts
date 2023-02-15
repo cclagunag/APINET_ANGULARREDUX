@@ -6,6 +6,10 @@ const routes: Routes = [
     path: '',
     children: [
       {
+        path: 'inmueble',
+        loadChildren: ()=> import('./pages/inmueble/inmueble.module').then(m => m.InmuebleModule)
+      },
+      {
         path: 'static',
         loadChildren: ()=> import('./pages/static/static.module').then(m => m.StaticModule)
       },
